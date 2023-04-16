@@ -1,0 +1,27 @@
+.arc-progress {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .arc-progress__circle {
+    fill: none;
+    stroke-linecap: round;
+  }
+  
+  .arc-progress__circle-bg {
+    stroke: #eeeeee;
+  }
+  
+  .arc-progress__circle-fill {
+    stroke: #00b3ff;
+  }
+  
+  .arc-progress__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 14px;
+    transform: translate(-50%, -50%);
+  }

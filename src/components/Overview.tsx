@@ -6,8 +6,8 @@ import { Spinner } from '@chakra-ui/react'
 
 const Overview = (props: any) => {
 
-    const { dataHist, dataScore, loading } = props
-    console.log(loading)
+    const { accData, dataScore, loading} = props
+    console.log(accData)
     const spinner = (<Spinner
         thickness='4px'
         speed='0.65s'
@@ -26,33 +26,24 @@ const Overview = (props: any) => {
                         <Table variant='simple'>
                             <Thead>
                                 <Tr>
-                                    <Th>Score</Th>
-                                    <Th>Price</Th>
-                                    <Th isNumeric>Balance</Th>
-                                    <Th isNumeric>Value</Th>
+                                    <Th>First Txn Date</Th>
+                                    <Th> Txn Count </Th>
+                                    <Th>ETH Price</Th>
+                                    <Th>ETH Balance</Th>
+                                    <Th>$-Value</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 <Tr>
-                                    <Td>{Object.keys(dataHist).length > 0 ? dataHist.hist.borrowAmount : '-'}</Td>
-                                    <Td>$2095.63</Td>
-                                    <Td isNumeric>12.287</Td>
-                                    <Td isNumeric>$25749.08</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? accData.walletData.first_txn_date : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? accData.walletData.num_transcations : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? "$" + parseFloat(accData.walletData.eth_curr_price).toLocaleString()  : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? parseFloat(accData.walletData.eth_balance).toLocaleString() : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? "$" +(parseFloat(accData.walletData.eth_curr_price) * parseFloat(accData.walletData.eth_balance)).toLocaleString() : '-'}</Td>
                                 </Tr>
                             </Tbody>
                         </Table>
                     </TableContainer>
-                </CardBody>
-            </Card>
-
-            <Card border='1px' borderColor='gray.400'>
-                <CardHeader>
-                    <Heading size='md'>NFT</Heading>
-                </CardHeader>
-                <CardBody>
-                    <Box>
-                        <Image rounded='lg' boxSize='150px' objectFit='cover' src="https://storage.googleapis.com/zapper-fi-assets/nft/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/1500x5006.jpeg" alt="ENS: Ethereum Name Service" />
-                    </Box>
                 </CardBody>
             </Card>
 
@@ -65,32 +56,50 @@ const Overview = (props: any) => {
                         <Table variant='simple'>
                             <Thead>
                                 <Tr>
+                                    <Th>Available Borrows ETH</Th>
                                     <Th>Borrow Amount</Th>
-                                    <Th>Borrow Count</Th>
+                                    <Th isNumeric>Borrow Count</Th>
                                     <Th isNumeric>Flash Loan Count</Th>
-                                    <Th isNumeric>Liquidation Amount</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 <Tr>
-                                    <Td>{Object.keys(dataHist).length > 0 ? dataHist.hist.borrowAmount : '-'}</Td>
-                                    <Td>{Object.keys(dataHist).length > 0 ? dataHist.hist.borrowCount : '-'}</Td>
-                                    <Td isNumeric>{Object.keys(dataHist).length > 0 ? dataHist.hist.flashLoanCount : '-'}</Td>
-                                    <Td isNumeric>{Object.keys(dataHist).length > 0 ? dataHist.hist.liquidationAmount : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? accData.AaveData.available_borrows_ETH : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? accData.AaveData.borrowAmount : '-'}</Td>
+                                    <Td isNumeric>{Object.keys(accData).length > 0 ? accData.AaveData.borrowCount : '-'}</Td>
+                                    <Td isNumeric>{Object.keys(accData).length > 0 ? accData.AaveData.flashLoanCount : '-'}</Td>
                                 </Tr>
                             </Tbody>
                             <Thead>
                                 <Tr>
+                                    <Th>Liquidation Amount</Th>
                                     <Th>Liquidation Count</Th>
-                                    <Th>Repay Amount</Th>
+                                    <Th isNumeric>Repay Amount</Th>
                                     <Th isNumeric>Repay Count</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 <Tr>
-                                    <Td>{Object.keys(dataHist).length > 0 ? dataHist.hist.liquidationCount : '-'}</Td>
-                                    <Td>{Object.keys(dataHist).length > 0 ? dataHist.hist.repayAmount : '-'}</Td>
-                                    <Td isNumeric>{Object.keys(dataHist).length > 0 ? dataHist.hist.repayCount : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? accData.AaveData.liquidationAmount : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? accData.AaveData.liquidationCount : '-'}</Td>
+                                    <Td isNumeric>{Object.keys(accData).length > 0 ? accData.AaveData.repayAmount : '-'}</Td>
+                                    <Td isNumeric>{Object.keys(accData).length > 0 ? accData.AaveData.repayCount : '-'}</Td>
+                                </Tr>
+                            </Tbody>
+                            <Thead>
+                                <Tr>
+                                    <Th>Current Liquidation Threshold</Th>
+                                    <Th>Health Factor</Th>
+                                    <Th isNumeric>LTV</Th>
+                                    <Th isNumeric>Total Collateral ETH</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                <Tr>
+                                    <Td>{Object.keys(accData).length > 0 ? accData.AaveData.current_liquidation_threshold : '-'}</Td>
+                                    <Td>{Object.keys(accData).length > 0 ? accData.AaveData.health_factor : '-'}</Td>
+                                    <Td isNumeric>{Object.keys(accData).length > 0 ? accData.AaveData.ltv : '-'}</Td>
+                                    <Td isNumeric>{Object.keys(accData).length > 0 ? accData.AaveData.total_collateral_ETH : '-'}</Td>
                                 </Tr>
                             </Tbody>
                         </Table>

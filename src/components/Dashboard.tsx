@@ -1,26 +1,23 @@
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
 import Overview from './Overview'
+import NFT from './NFT'
 
 const Dashboard = (props: any) => {
-    const {dataScore, dataHist, loading} = props
-
+    const {dataScore, accData, loading} = props
+    console.log(accData)
     return (
         <Tabs>
             <TabList my="10">
                 <Tab>Overview</Tab>
-                <Tab>Portfolio</Tab>
                 <Tab>NFTs</Tab>
             </TabList>
 
             <TabPanels>
                 <TabPanel>
-                    <Overview dataScore={dataScore} dataHist={dataHist} loading={loading}/>
+                    <Overview dataScore={dataScore} accData={accData} loading={loading}/>
                 </TabPanel>
                 <TabPanel>
-                    <p>two!</p>
-                </TabPanel>
-                <TabPanel>
-                    <p>three!</p>
+                    <NFT dataScore={dataScore} accData={accData} loading={loading}/>
                 </TabPanel>
             </TabPanels>
         </Tabs>

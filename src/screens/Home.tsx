@@ -6,13 +6,13 @@ import { useState } from 'react'
 
 const Home: React.FC<PreHomeScreenProps> = ({ navigation }) => {
   const [dataScore, setDataScore] = useState({});
-  const [dataHist, setDataHist] = useState({});
+  const [accData, setAccData] = useState({});
   const [loading, setLoading] = useState(false)
 
   return (
-    <Box maxWidth={900} margin={"auto"} my={20}>
-      <Address setDataHist={setDataHist} setDataScore={setDataScore} setLoading={setLoading}/>
-      <Dashboard dataHist={dataHist} dataScore={dataScore} loading={loading}/>
+    <Box maxWidth={1050} margin={"auto"} my={20}>
+      <Address setAccData={setAccData} setDataScore={setDataScore} setLoading={setLoading} dataScore={dataScore}/>
+      <Dashboard accData={accData} dataScore={dataScore} loading={loading}/>
     </Box>
   );
 };
